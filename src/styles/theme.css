@@ -1,0 +1,161 @@
+/* =====================================================================
+   PNHS Online Voting System — Theme
+   Deep regal (Ateneo-inspired) blue + neutrals, editorial serif type.
+   Mobile-first: large tap targets, responsive ballot.
+   ===================================================================== */
+
+:root {
+  --navy:        #002D62;   /* primary deep regal blue */
+  --navy-700:    #00308F;
+  --navy-500:    #1d4e9c;
+  --blue-tint:   #eaf0fa;
+  --gold:        #c8a24a;   /* subtle academic accent */
+  --ink:         #1a1f29;
+  --muted:       #5b6472;
+  --line:        #d8dee9;
+  --paper:       #f7f8fb;
+  --white:       #ffffff;
+  --danger:      #9b1c1c;
+  --success:     #1c6b3c;
+  --serif: Georgia, "Times New Roman", "PT Serif", "Liberation Serif", serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--serif);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--navy); margin: 0 0 .5rem; }
+a { color: var(--navy-700); }
+
+/* ---------------- Layout ---------------- */
+.container { max-width: 920px; margin: 0 auto; padding: 1rem; }
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+.center-screen {
+  min-height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.25rem;
+}
+
+/* ---------------- Navbar ---------------- */
+.navbar {
+  background: var(--navy);
+  color: var(--white);
+  border-bottom: 4px solid var(--gold);
+}
+.navbar-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; gap: .75rem;
+  padding: .65rem 1rem;
+}
+.navbar img { height: 40px; width: 40px; object-fit: contain; background: #fff; border-radius: 6px; }
+.navbar .brand { font-size: 1.05rem; font-weight: 700; letter-spacing: .3px; }
+.navbar .brand small { display: block; font-size: .72rem; font-weight: 400; opacity: .8; letter-spacing: .5px; }
+.navbar .spacer { flex: 1; }
+.navbar a, .navbar button.link {
+  color: #dfe7f5; text-decoration: none; background: none; border: 0;
+  font-family: var(--serif); font-size: .95rem; cursor: pointer; padding: .35rem .5rem;
+}
+.navbar a:hover { color: #fff; }
+
+/* ---------------- Cards ---------------- */
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+.card + .card { margin-top: 1rem; }
+.card-header { border-bottom: 2px solid var(--blue-tint); padding-bottom: .6rem; margin-bottom: .9rem; }
+
+/* ---------------- Buttons ---------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 1.05rem;
+  padding: .85rem 1.25rem; border-radius: 8px;
+  border: 1px solid transparent; cursor: pointer;
+  min-height: 48px; /* tap target */
+}
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: var(--navy-700); }
+.btn-gold { background: var(--gold); color: #2a2410; border-color: #b08d36; }
+.btn-outline { background: #fff; color: var(--navy); border-color: var(--navy); }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-block { width: 100%; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+
+/* ---------------- Forms ---------------- */
+label { display: block; font-size: .9rem; color: var(--muted); margin: .75rem 0 .3rem; }
+input[type=text], input[type=password], input[type=email],
+input[type=number], input[type=datetime-local], select, textarea {
+  width: 100%; font-family: var(--serif); font-size: 1.05rem;
+  padding: .8rem .85rem; border: 1px solid var(--line); border-radius: 8px;
+  min-height: 48px; background: #fff; color: var(--ink);
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--navy-500); border-color: var(--navy-500); }
+
+/* ---------------- Ballot ---------------- */
+.position-block { margin-bottom: 1.25rem; }
+.position-title { font-size: 1.2rem; border-left: 5px solid var(--gold); padding-left: .6rem; }
+.candidate-option {
+  display: flex; align-items: center; gap: .85rem;
+  border: 2px solid var(--line); border-radius: 10px;
+  padding: .8rem; margin-top: .6rem; cursor: pointer;
+  background: #fff; transition: border-color .12s, background .12s;
+}
+.candidate-option:hover { border-color: var(--navy-500); }
+.candidate-option.selected { border-color: var(--navy); background: var(--blue-tint); }
+.candidate-option input[type=radio] {
+  width: 26px; height: 26px; min-width: 26px; accent-color: var(--navy); margin: 0;
+}
+.candidate-option img {
+  width: 56px; height: 56px; min-width: 56px; border-radius: 8px;
+  object-fit: cover; background: var(--blue-tint); border: 1px solid var(--line);
+}
+.candidate-option .cand-name { font-size: 1.05rem; font-weight: 600; }
+.candidate-option .cand-party { font-size: .82rem; color: var(--muted); }
+.abstain .cand-name { font-style: italic; color: var(--muted); }
+
+/* ---------------- Misc ---------------- */
+.notice { padding: .8rem 1rem; border-radius: 8px; margin: .75rem 0; }
+.notice-error { background: #fbeaea; color: var(--danger); border: 1px solid #e8b6b6; }
+.notice-info  { background: var(--blue-tint); color: var(--navy); border: 1px solid #c4d4ef; }
+.notice-success { background: #e7f3ec; color: var(--success); border: 1px solid #bcdcc7; }
+.muted { color: var(--muted); }
+.text-center { text-align: center; }
+.big-state { text-align: center; padding: 2rem 1rem; }
+.big-state .mark { font-size: 3rem; line-height: 1; margin-bottom: .5rem; }
+
+table.data { width: 100%; border-collapse: collapse; font-size: .95rem; }
+table.data th, table.data td { text-align: left; padding: .6rem .5rem; border-bottom: 1px solid var(--line); }
+table.data th { color: var(--navy); border-bottom: 2px solid var(--blue-tint); }
+
+.bar-track { background: var(--blue-tint); border-radius: 6px; height: 14px; overflow: hidden; }
+.bar-fill { background: var(--navy); height: 100%; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.stat { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 1rem; text-align: center; }
+.stat .num { font-size: 1.9rem; color: var(--navy); font-weight: 700; }
+.stat .lbl { font-size: .82rem; color: var(--muted); }
+
+.admin-tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+.admin-tabs button {
+  font-family: var(--serif); font-size: .95rem; padding: .55rem .9rem;
+  border: 1px solid var(--line); background: #fff; border-radius: 8px; cursor: pointer; min-height: 44px;
+}
+.admin-tabs button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+@media (max-width: 640px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .navbar .brand { font-size: .95rem; }
+  .container, .container-wide { padding: .85rem; }
+}
