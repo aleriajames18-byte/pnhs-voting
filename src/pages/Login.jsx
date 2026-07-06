@@ -9,6 +9,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
+  const [logoOk, setLogoOk] = useState(true);
 
   // Already signed in as a student -> go to ballot (which handles voted/closed states)
   if (!loading && session && voter) { nav("/vote", { replace: true }); }
@@ -29,11 +30,18 @@ export default function Login() {
     <div className="center-screen">
       <div className="card" style={{ maxWidth: 420, width: "100%" }}>
         <div className="text-center" style={{ marginBottom: ".5rem" }}>
-          <div aria-hidden style={{
-            margin: "0 auto .6rem", height: 64, width: 64, borderRadius: 10,
-            background: "var(--navy)", color: "#fff", display: "flex",
-            alignItems: "center", justifyContent: "center", fontWeight: 700,
-          }}>PNHS</div>
+          {logoOk ? (
+            <img src="/logo.png" alt="Polanco National High School logo"
+              onError={() => setLogoOk(false)}
+              style={{ margin: "0 auto .6rem", height: 80, width: 80,
+                objectFit: "contain", display: "block" }} />
+          ) : (
+            <div aria-hidden style={{
+              margin: "0 auto .6rem", height: 64, width: 64, borderRadius: 10,
+              background: "var(--navy)", color: "#fff", display: "flex",
+              alignItems: "center", justifyContent: "center", fontWeight: 700,
+            }}>PNHS</div>
+          )}
           <h2>Student Login</h2>
           <p className="muted" style={{ marginTop: 0 }}>
             Enter your Learner Reference Number to cast your ballot.
