@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
-  const { loginWithLrn, session, voter, loading } = useAuth();
+  const { loginWithLrn, session, voter, loading, profileReady } = useAuth();
   const nav = useNavigate();
   const [lrn, setLrn] = useState("");
   const [password, setPassword] = useState("");
@@ -11,19 +11,24 @@ export default function Login() {
   const [busy, setBusy] = useState(false);
   const [logoOk, setLogoOk] = useState(true);
 
-  // Already signed in as a student -> go to ballot (which handles voted/closed states)
-  if (!loading && session && voter) { nav("/vote", { replace: true }); }
+  // Redirect once the session AND profile are fully loaded (fixes the
+  // "stuck on Signing in… until refresh" race).
+  useEffect(() => {
+    if (!loading && profileReady && session && voter) {
+      nav("/vote", { replace: true });
+    }
+  }, [loading, profileReady, session, voter, nav]);
 
   const submit = async (e) => {
     e.preventDefault();
     setErr(""); setBusy(true);
     const error = await loginWithLrn(lrn, password);
-    setBusy(false);
     if (error) {
+      setBusy(false);
       setErr("Invalid LRN or password. Please check and try again.");
-    } else {
-      nav("/vote", { replace: true });
     }
+    // On success, leave the button in "Signing in…" — the effect above
+    // navigates as soon as the profile finishes loading.
   };
 
   return (
