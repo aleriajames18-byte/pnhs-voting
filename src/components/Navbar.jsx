@@ -17,7 +17,7 @@ export default function Navbar() {
         )}
         <div className="brand">
           Polanco National High School
-          <small>Supreme Secondary Learner Government Elections</small>
+          <small>Supreme Secondary Learner Special Government Elections</small>
         </div>
         <span className="spacer" />
         <Link to="/results">Results</Link>
